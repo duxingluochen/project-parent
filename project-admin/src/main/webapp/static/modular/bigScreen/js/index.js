@@ -34,7 +34,7 @@ $(function() {
             var menu = document.getElementById(name + i);
             menu.className = i == cursel ? "hover" : "";
             if (menu.className == "hover")
-                $(menu).attr("src", rootPath + "static/modular/bigScreen/image/head-icon2.png").siblings().attr("src", rootPath + "static/modular/bigScreen/image/head-icon.png");
+                //$(menu).attr("src", rootPath + "static/modular/bigScreen/image/head-icon2.png").siblings().attr("src", rootPath + "static/modular/bigScreen/image/head-icons.png");
             index = i;
         }
     }
