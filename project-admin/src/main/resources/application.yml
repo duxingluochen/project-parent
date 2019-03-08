@@ -85,7 +85,16 @@ ftp:
   username: administrator
   port: 21
   httpPath: http://192.168.1.228:8888
-
+#jedis配置
+redis:
+  host: 192.168.1.225
+  port: 6379
+  password:
+  timeout: 10000
+  max-active: 200
+  max-wait: -1
+  max-idle: 8
+  min-idle: 0
 
 
 

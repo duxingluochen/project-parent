@@ -9,19 +9,16 @@ import com.mapscience.core.common.constant.state.MenuStatus;
 import com.mapscience.core.common.status.ProjectStatusEnum;
 import com.mapscience.core.exception.ProjectException;
 import com.mapscience.core.node.ZTreeNode;
+import com.mapscience.core.util.JedisUtil;
 import com.mapscience.core.util.ToolUtil;
 import com.mapscience.modular.system.model.Menu;
 import com.mapscience.modular.system.service.IMenuService;
 import com.mapscience.modular.system.warpper.MenuWarpper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * 菜单控制器
@@ -35,6 +32,10 @@ public class MenuController extends BaseController {
     @Autowired
     private IMenuService menuService;
 
+    /**
+     * 进入菜单页面
+     * @return
+     */
     @RequestMapping(value = "")
     public String index() {
         return PREFIX + "menu";
@@ -51,7 +52,7 @@ public class MenuController extends BaseController {
     /**
      * 获取菜单列表
      */
-    @Permission(Const.ADMIN_NAME)
+    //@Permission(Const.ADMIN_NAME)
     @RequestMapping(value = "/list")
     @ResponseBody
     public Object list(@RequestParam(required = false) String menuName, @RequestParam(required = false) String level) {
@@ -82,6 +83,18 @@ public class MenuController extends BaseController {
      * 查询菜单树
      * @return
      */
+    @RequestMapping("/menuTree")
+    @ResponseBody
+    public ResponseVal menuTree(){
+        //JedisUtil.get("menuTree");
+        return this.menuService.findmenuChildren();
+    }
+
+
+    /**
+     * 查询菜单树
+     * @return
+     */
     @RequestMapping(value = "/selectMenuTreeList")
     @ResponseBody
     public List<ZTreeNode> selectMenuTreeList() {
@@ -94,11 +107,11 @@ public class MenuController extends BaseController {
     /**
      * 新增菜单
      */
-    @Permission(Const.ADMIN_NAME)
+    //@Permission(Const.ADMIN_NAME)
     @RequestMapping(value = "/add")
     // @BussinessLog(value = "菜单新增", key = "name", dict = MenuDict.class)
     @ResponseBody
-    public ResponseVal add(Menu menu) {
+    public ResponseVal add(@RequestBody Menu t) {
        /* //判断是否存在该编号
         String existedMenuName = ConstantFactory.me().getMenuNameByCode(menu.getCode());
         if (ToolUtil.isNotEmpty(existedMenuName)) {
@@ -122,7 +135,7 @@ public class MenuController extends BaseController {
             return super.responseBody(ProjectStatusEnum.ERROR);
         }*/
 
-       return null;
+        return  this.menuService.saveMenu(t);
     }
 
     /**

@@ -14,6 +14,10 @@ public class ProjectException extends RuntimeException {
         this.code = projectStatusEnum.getCode();
         this.msg = projectStatusEnum.getMsg();
     }
+    public ProjectException(Integer code, String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
 
     public Integer getCode() {
         return code;

@@ -83,7 +83,8 @@ public class ShiroConfig {
         hashMap.put("/static/**", "anon");
         hashMap.put("/login", "anon");
         hashMap.put("/kaptcha", "anon");
-        hashMap.put("/**", "user");
+        //hashMap.put("/**", "user"); 用户认证
+        hashMap.put("/**","anon");
         shiroFilter.setFilterChainDefinitionMap(hashMap);
         return shiroFilter;
 

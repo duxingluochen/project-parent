@@ -19,7 +19,25 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        menu_id, level, menu_code, menu_name, parent_id, sort, status, url, remark, create_time, update_time
+        menu_id, level, menu_code, menu_name, parent_id, sort, status, url,icon, remark, create_time, update_time
     </sql>
+
+    <!--查询菜单-->
+    <select id="findmenuChildren" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_menu
+    </select>
+
+
+    <!--保存菜单-->
+    <insert id="saveMenu" useGeneratedKeys="true" keyProperty="menuId" parameterType="com.mapscience.modular.system.model.Menu">
+
+        <selectKey keyProperty="menuId" resultType="java.lang.String" order="BEFORE">
+            select REPLACE(UUID(),'-','')
+        </selectKey>
+        insert into t_menu(menu_id,level,menu_code,menu_name,parent_id,sort,status,url,icon,remark,create_time,update_time)
+        value(#{menuId},#{level},#{menuCode},#{menuName},#{parentId},#{sort},#{status},#{url},#{icon},#{remark},#{createTime},#{updateTime})
+    </insert>
 
 </mapper>

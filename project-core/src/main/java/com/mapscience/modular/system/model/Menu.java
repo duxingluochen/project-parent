@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * <p>
@@ -56,6 +57,11 @@ public class Menu extends Model<Menu> {
      * 跳转链接
      */
     private String url;
+
+    /**
+     * 图标
+     */
+    private String icon;
     /**
      * 备注
      */
@@ -71,6 +77,19 @@ public class Menu extends Model<Menu> {
     @TableField("update_time")
     private Date updateTime;
 
+
+    /**
+     * 子菜单
+     */
+    private List<Menu> children;
+
+    public List<Menu> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Menu> children) {
+        this.children = children;
+    }
 
     public String getMenuId() {
         return menuId;
@@ -165,20 +184,29 @@ public class Menu extends Model<Menu> {
         return this.menuId;
     }
 
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
     @Override
     public String toString() {
         return "Menu{" +
-        "menuId=" + menuId +
-        ", level=" + level +
-        ", menuCode=" + menuCode +
-        ", menuName=" + menuName +
-        ", parentId=" + parentId +
-        ", sort=" + sort +
-        ", status=" + status +
-        ", url=" + url +
-        ", remark=" + remark +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        "}";
+                "menuId='" + menuId + '\'' +
+                ", level=" + level +
+                ", menuCode='" + menuCode + '\'' +
+                ", menuName='" + menuName + '\'' +
+                ", parentId='" + parentId + '\'' +
+                ", sort=" + sort +
+                ", status=" + status +
+                ", url='" + url + '\'' +
+                ", icon='" + icon + '\'' +
+                ", remark='" + remark + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
     }
 }
