@@ -1,0 +1,62 @@
+<#include "${base}/modular/admin/common/public.html"/>
+<html lang="en">
+<@header title="车辆监管" keywords="车辆监管">
+<link rel="stylesheet" href="${base}/static/common/css/bootstrap.css">
+<link rel="stylesheet" href="${base}/static/modular/monitoring/css/index.css">
+<script src="${base}/static/common/js/jquery.min.js"></script>
+<script src="${base}/static/modular/monitoring/js/mon_vacle.js"></script>
+</@header>
+<@body>
+<div class="wrap-left">
+    <div class="wrap-left-top">
+        <div class="name">
+            <div class="number">28</div>
+            <div class="now">当前作业车辆</div>
+            <img src="${base}/static/modular/monitoring/image/icon_01.png" alt="">
+        </div>
+        <div class="name">
+            <div class="number">19</div>
+            <div class="now">车辆用油量</div>
+            <img src="${base}/static/modular/monitoring/image/icon_02.png" alt="">
+        </div>
+        <div class="name">
+            <div class="number">34</div>
+            <div class="now">车辆用水量</div>
+            <img src="${base}/static/modular/monitoring/image/icon_03.png" alt="">
+        </div>
+    </div>
+    <div class="wrap-left-bottom" id="map">
+        <button class="btn-opt">影像地图</button>
+    </div>
+</div>
+<div class="wrap-right">
+    <div class="wrap-right-top">
+        <p class="title">车辆基本信息</p>
+        <form class="layui-form layui-form-pane">
+            <div class="layui-row">
+                <div class="layui-inline layui-col-xs10">
+                    <label class="layui-form-label" style="height: 31px;width:100px;font-size: 10px" >车牌号搜索</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="vcleNumber" autocomplete="off" class="layui-input" style="height: 31px;width:120px;">
+                    </div>
+                </div>
+                <div class="layui-inline layui-col-xs2">
+                    <a class="layui-btn layui-btn-sm layui-btn-normal" onclick="VcleInfo.refresh()">搜索</a>
+                </div>
+            </div>
+        </form>
+        <table class="layui-table" lay-filter="vcleList" id="vcleList"></table>
+    </div>
+    <div class="wrap-right-middle">
+    </div>
+    <div class="wrap-right-bottom">
+        <div class="title2">车辆视频</div>
+        <div class="video"></div>
+    </div>
+</div>
+</@body>
+</html>
+<link href="http://192.168.1.154/arcgis_js_api/library/3.9/3.9/js/esri/css/esri.css" rel="stylesheet"/>
+<script src="http://192.168.1.154/arcgis_js_api/library/3.9/3.9/init.js" type="text/javascript"></script>
+<script src="${base}/static/common/js/allMapUrl.js"></script>
+<script src="${base}/static/modular/monitoring/js/map.js"></script>

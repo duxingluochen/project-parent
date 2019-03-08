@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapscience.modular.system.mapper.DriverMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.mapscience.modular.system.model.Driver">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="license_number" property="licenseNumber" />
+        <result column="driving_age" property="drivingAge" />
+        <result column="vehicle_type" property="vehicleType" />
+        <result column="peccancy_times" property="peccancyTimes" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id, license_number, driving_age, vehicle_type, peccancy_times
+    </sql>
+    
+    <select id="getDriverList" resultMap="BaseResultMap">
+        select d.id,u.name as user_id from sys_driver d join sys_user u on u.id=d.user_id
+    </select>
+
+</mapper>

@@ -1,0 +1,40 @@
+<#include "${base}/modular/admin/common/public.html"/>
+<@header title="设施使用" keywords="设施使用">
+<script type="text/javascript" src="${base}/static/modular/facilities/facUse/js/facUseList.js"></script>
+</@header>
+<@body>
+<div class="wrap-container clearfix">
+    <div class="column-content-detail">
+        <form class="layui-form layui-form-pane" action="">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">设施名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="facName" name="facName" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <a class="layui-btn layui-btn-normal" onclick="FacUse.search()">搜索</a>
+                </div>
+            </div>
+        </form>
+        <div class="layui-form" id="table-list">
+            <table class="layui-table" lay-even lay-skin="nob" id="facUseList" lay-filter="facUseList">
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="toolbar">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="add">
+            <i class="layui-icon">&#xe654;</i>添加使用信息
+        </button>
+    </div>
+</script>
+
+<script type="text/html" id="bar">
+    <button class="layui-btn layui-btn-xs" lay-event="edit">编辑</button>
+    <button class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</button>
+</script>
+</@body>

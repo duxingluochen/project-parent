@@ -1,0 +1,54 @@
+<#include "${base}/modular/admin/common/public.html"/>
+<@header title="添加角色" keywords="添加角色">
+<script type="text/javascript" src="${base}/static/modular/system/role/js/role_add.js"></script>
+</@header>
+<@body>
+<div class="layui-tab page-content-wrap">
+    <div class="layui-tab-item layui-show">
+        <form class="layui-form layui-form-pane" style="width: 90%;padding-top: 20px;">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">角色名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="name" autocomplete="off" class="layui-input" value="${role.name}" lay-verify="required">
+                    </div>
+                    <label class="layui-form-label">别名</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="tips" id="tips" class="layui-input" value="${role.tips}" lay-verify="required">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">父角色</label>
+                    <div class="layui-input-inline">
+                        <select name="pid" id="pid" lay-filter="pid" lay-search>
+                            <option value="0">请选择..</option>
+                            <#list pRole as i>
+                            <option value="${i.id}">${i.name}</option>
+                        </#list>
+                        </select>
+                    </div>
+                    <label class="layui-form-label">部门名称</label>
+                    <div class="layui-input-inline">
+                        <select name="deptid" id="deptid" lay-filter="deptid" lay-search lay-verify="required">
+                            <option value="">请选择..</option>
+                            <#list dept as i>
+                                <option value="${i.id}">${i.fullname}</option>
+                            </#list>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <input class="layui-btn" lay-filter="addrole" lay-submit="" value="立即提交"/>
+                </div>
+            </div>
+            <input type="text" id="id" name="id" autocomplete="off" class="layui-input layui-hide" value="${role.id}">
+        </form>
+        <input type="text" id="pidval" autocomplete="off" class="layui-input layui-hide" value="${role.pid}">
+        <input type="text" id="deptidval" autocomplete="off" class="layui-input layui-hide" value="${role.deptid}">
+    </div>
+</div>
+</@body>

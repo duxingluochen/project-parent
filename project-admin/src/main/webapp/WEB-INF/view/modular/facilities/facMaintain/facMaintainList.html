@@ -1,0 +1,77 @@
+<#include "${base}/modular/admin/common/public.html"/>
+<@header title="设施维护" keywords="设施维护">
+<link rel="stylesheet" href="${base}/static/modular/facilities/facMaintain/css/facMaintainList.css">
+<script type="text/javascript" src="${base}/static/modular/facilities/facMaintain/js/facMaintainList.js"></script>
+</@header>
+<@body>
+<div class="wrap-container clearfix">
+    <div class="ibox-title">
+        <h5>设施维护</h5>
+    </div>
+    <div class="column-content-detail">
+        <form class="layui-form layui-form-pane" action="">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">设施名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="facName" name="facName" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <a class="layui-btn layui-btn-normal" onclick="FacMaintain.search()">搜索</a>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">任务筛选</label>
+                    <div class="layui-input-inline" style="width: 500px">
+                        <input type="radio" lay-filter="selection" name="selection" value="all" title="所有任务" checked="">
+                        <input type="radio" lay-filter="selection" name="selection" value="launch" title="我发起的">
+                        <input type="radio" lay-filter="selection" name="selection" value="pending" title="我的待办">
+                        <input type="radio" lay-filter="selection" name="selection" value="solved" title="我的已办">
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="layui-form" id="table-list">
+            <table class="layui-table" lay-even lay-skin="nob" id="facMaintainList" lay-filter="facMaintainList">
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="toolbar">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="add">
+            <i class="layui-icon">&#xe654;</i>发起设施维护审核
+        </button>
+    </div>
+</script>
+
+<script type="text/html" id="bar">
+    {{#  if(d.beforePhotos.indexOf('Y') >= 0){ }}
+        <button class="layui-btn layui-btn-xs" lay-event="edit">查看详情</button>
+        <button class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">撤销并删除</button>
+    {{# }else { }}
+        {{#  if(d.beforePhotos.indexOf('0') >= 0 || d.beforePhotos.indexOf('1') >= 0){ }}
+            <button class="layui-btn layui-btn-xs" lay-event="approve">进行审核</button>
+        {{# }else { }}
+            <button class="layui-btn layui-btn-xs" lay-event="details">查看详情</button>
+        {{# } }}
+    {{# } }}
+</script>
+
+<script type="text/html" id="flowbar">
+    <div class="flow">
+    {{#  $.each(d.schedule, function(i,item){ }}
+        {{#  if(item.state == 0 || item.state == 1){ }}
+            &nbsp;<span class="arrive">{{item.name}}</span>
+        {{# } else if (item.state == 2){ }}
+            &nbsp;<span class="finish">{{item.name}}</span>
+        {{# } else if (item.state == 3){ }}
+            &nbsp;<span class="reject">{{item.name}}</span>
+        {{# } else { }}
+            &nbsp;<span class="other">{{item.name}}</span>
+        {{# } }}
+    {{# }) }}
+    </div>
+</script>
+</@body>

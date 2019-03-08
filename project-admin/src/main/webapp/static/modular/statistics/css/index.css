@@ -1,0 +1,49 @@
+html, body {
+    height: 100%;
+    overflow: hidden;
+    zoom: 1;
+    background: #f3f3f3;
+}
+
+.wrap-left {
+    width: 49.25%;
+    height: 100%;
+    float: left;
+}
+
+.wrap-left .page {
+    height: 32%;
+    margin-bottom: 2%;
+    border-radius: 5px;
+    box-shadow: 0 0 9px rgba(132, 132, 132, .26);
+    background: #fff;
+    overflow: hidden;
+    zoom: 1;
+    position: relative;
+}
+
+.wrap-left>div {
+    margin-bottom: 0;
+}
+
+.wrap-right {
+    width: 49.25%;
+    height: 100%;
+    margin-left: 1.5%;
+    float: left;
+}
+
+.wrap-right .page {
+    height: 49%;
+    margin-bottom: 2%;
+    border-radius: 5px;
+    box-shadow: 0 0 9px rgba(132, 132, 132, .26);
+    background: #fff;
+    overflow: hidden;
+    zoom: 1;
+    position: relative;
+}
+
+.wrap-right>div {
+    margin-bottom: 0;
+}

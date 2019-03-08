@@ -1,0 +1,51 @@
+<#include "${base}/modular/admin/common/public.html"/>
+<@header title="环卫业绩考核" keywords="环卫业绩考核">
+<link rel="stylesheet" href="${base}/static/common/font-awesome-4.7.0/css/font-awesome.css">
+<link rel="stylesheet" href="${base}/static/modular/achievement/css/index.css">
+<script type="text/javascript" src="${base}/static/common/js/echarts.min.js"></script>
+<script type="text/javascript" src="${base}/static/modular/achievement/js/san_achievement.js"></script>
+</@header>
+<@body>
+    <div class="wap-left">
+        <div class="search">
+            <input type="text" placeholder="请按姓名输入查找">
+            <span class="fa fa-search"></span>
+        </div>
+        <br>
+        <p class="table-name">工作人员基本信息表</p>
+        <table class="layui-table" id="userTableList" lay-filter="userTableList"></table>
+    </div>
+    <div class="wap-right">
+        <div class="opt">
+            <span class="tt">数据分析</span>
+            <div class="pull-right">
+                <span class="date">周</span>
+                <span class="date">月</span>
+                <span class="date">年</span>
+                <div class="layui-inline">
+                    <input type="text" class="layui-input" id="start">
+                </div>
+                <span class="date">查询</span>
+            </div>
+        </div>
+        <div class="ctr">
+            <div class="pgx">
+                <span>违规次数</span>
+                <div class="det one">36</div>
+            </div>
+            <div class="pgx">
+                <span>出勤班次</span>
+                <div class="det two">42</div>
+            </div>
+            <div class="pgx">
+                <span>出勤率</span>
+                <div class="det thr">92%</div>
+            </div>
+            <div class="pgx">
+                <span>加班次数</span>
+                <div class="det fou">6</div>
+            </div>
+        </div>
+        <div class="cva" id="cva"></div>
+    </div>
+</@body>

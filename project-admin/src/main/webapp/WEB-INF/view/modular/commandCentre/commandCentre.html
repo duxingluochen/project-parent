@@ -1,0 +1,51 @@
+<#include "${base}/modular/admin/common/public.html"/>
+<html lang="en">
+<@header title="指挥中心" keywords="指挥中心">
+<link rel="stylesheet" href="${base}/static/common/css/bootstrap.css">
+<link rel="stylesheet" href="${base}/static/common/font-awesome-4.7.0/css/font-awesome.css">
+<link rel="stylesheet" href="${base}/static/modular/commandCentre/css/commandCentre.css">
+<script src="${base}/static/common/js/jquery.min.js"></script>
+<!--<script type="text/javascript" src="${base}/static/common/js/echarts.min.js"></script>-->
+</@header>
+<@body>
+    <div class="wrapper">
+        <div class="title">智慧环卫应急指挥调度中心</div>
+        <div class="opt">
+            <span class="fa fa-bell-o"></span>
+            欢迎您：<span>李先生</span>
+            <a href="${base}/toBigScreen">控制台</a>
+            <a href="${base}/logout">退出</a>
+        </div>
+    </div>
+    <div class="search">
+        <div>
+            <input type="text" placeholder="请输入收搜关键字">
+            <span class="fa fa-search"></span>
+        </div>
+        <span>查询</span>
+    </div>
+    <div class="menu">
+        <div class="icon">
+            <img src="${base}/static/modular/commandCentre/image/icon_01.png" alt="">
+            <span>环保一张图</span>
+        </div>
+        <div class="icon">
+            <img src="${base}/static/modular/commandCentre/image/icon_02.png" alt="">
+            <span>车辆轨迹</span>
+        </div>
+        <div class="icon">
+            <img src="${base}/static/modular/commandCentre/image/icon_03.png" alt="">
+            <span>车辆调度</span>
+        </div>
+    </div>
+    <div class="map" id="map">
+        <button class="btn-opt">矢量地图</button>
+    </div>
+</@body>
+</html>
+<!--<link rel="stylesheet" href="https://js.arcgis.com/3.27/esri/css/esri.css">
+<script src="https://js.arcgis.com/3.27/"></script>-->
+<link href="http://192.168.1.154/arcgis_js_api/library/3.9/3.9/js/esri/css/esri.css" rel="stylesheet"/>
+<script src="http://192.168.1.154/arcgis_js_api/library/3.9/3.9/init.js" type="text/javascript"></script>
+<script src="${base}/static/common/js/allMapUrl.js"></script>
+<script src="${base}/static/modular/commandCentre/js/map.js"></script>

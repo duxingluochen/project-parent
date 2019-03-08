@@ -1,0 +1,70 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<!--公共头部 标题  描述  -->
+<#macro header title="后台管理" keywords="后台管理">
+<head>
+    <meta charset="UTF-8">
+    <title>${title}</title>
+    <meta name="keywords" content="${keywords}" />
+    <link href="${base}/static/common/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${base}/static/common/plugins/bootstrap/css/bootstrap-table.min.css" rel="stylesheet">
+    <link href="${base}/static/common/plugins/bootstrap/css/bootstrapValidator.min.css" rel="stylesheet">
+    <link href="${base}/static/common/plugins/bootstrap/css/style.css" rel="stylesheet">
+    <link href="${base}/static/common/plugins/bootstrap/css/_fstyle.css" rel="stylesheet">
+    <link href="${base}/static/common/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="${base}/static/common/plugins/webuploader/webuploader.css" rel="stylesheet">
+    <link href="${base}/static/common/plugins/ztree/css/zTreeStyle.css" rel="stylesheet">
+    <link href="${base}/static/common/plugins/bootstrap/css/bootstrap-treetable.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="${base}/static/common/plugins/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="${base}/static/common/plugins/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="${base}/static/modular/admin/css/admin.css"/>
+    <style type="text/css">
+        table{
+            width:100px;
+            table-layout:fixed;/* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
+        }
+        td{
+            width:100%;
+            word-break:keep-all;/* 不换行 */
+            white-space:nowrap;/* 不换行 */
+            overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+            text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用*/
+        }
+    </style>
+    <#nested/>
+</head>
+</#macro>
+<body>
+<!--公共部分-->
+<#macro body>
+<#nested/>
+</#macro>
+<!--admin js-->
+<script src="${base}/static/common/plugins/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="${base}/static/modular/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="${base}/static/modular/admin/js/main.js" type="text/javascript" charset="utf-8"></script>
+
+
+<script src="${base}/static/common/js/jquery.min.js?v=2.1.4"></script>
+<script src="${base}/static/common/plugins/ztree/js/jquery.ztree.all.min.js"></script>
+<script src="${base}/static/common/plugins/bootstrap/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="${base}/static/common/plugins/validate/bootstrapValidator.min.js"></script>
+<script src="${base}/static/common/plugins/validate/zh_CN.js"></script>
+<script src="${base}/static/common/plugins/bootstrap/bootstrap-treetable.js"></script>
+<script src="${base}/static/common/plugins/layui/lay/modules/layer.js"></script>
+<script src="${base}/static/common/plugins/chosen/chosen.jquery.js"></script>
+<script src="${base}/static/common/plugins/iCheck/icheck.min.js"></script>
+<script src="${base}/static/common/js/core/bootstrap-table-object.js"></script>
+<script src="${base}/static/common/js/core/tree-table-object.js"></script>
+<script src="${base}/static/common/js/core/ztree-object.js"></script>
+<script src="${base}/static/common/js/core/ajax-object.js"></script>
+<script src="${base}/static/common/js/core/Feng.js"></script>
+<script src="${base}/static/common/js/core/MyObject.js"></script>
+<script type="text/javascript">
+    Feng.addCtx("${base}");
+    Feng.sessionTimeoutRegistry();
+</script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--<base id="base" href="${base}">-->
+    <meta charset="UTF-8">
+    <title>后台管理</title>
+    <link rel="stylesheet" href="${base}/static/common/font-awesome-4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="${base}/static/modular/admin/css/left.css">
+    <script type="text/javascript" src="${base}/static/common/js/jquery.min.js"></script>
+</head>
+<body>
+<div class="main-layout" id='main-layout'>
+    <!--侧边栏-->
+    <div class="main-layout-side">
+        <div class="m-logo">
+            智慧环卫管理系统
+            <!--<img src="${base}/static/common/image/long2.png">-->
+        </div>
+        <div class="personIcon">
+            <div class="personImg">
+                <img src="${httpPath}${avatar}">
+            </div>
+            <div class="name">${shiroUser.name}</div>
+        </div>
+        <!--<ul class="layui-nav layui-nav-tree" lay-filter="leftNav">
+            <li>
+                <a href="javascript:void(0);">
+                    <img src="${base}/static/modular/admin/image/menu_01.png" alt="">后台管理<i class="fa fa-angle-right"></i>
+                </a>
+                <ul class="second">
+                    <li><a href="javascript:void(0);">1</a></li>
+                    <li><a href="javascript:void(0);">2</a></li>
+                    <li><a href="javascript:void(0);">3</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0);">
+                    <img src="${base}/static/modular/admin/image/menu_02.png" alt="">统计分析<i class="fa fa-angle-right"></i>
+                </a>
+                <ul class="second">
+                    <li><a href="javascript:void(0);">1</a></li>
+                    <li><a href="javascript:void(0);">2</a></li>
+                    <li><a href="javascript:void(0);">3</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0);">
+                    <img src="${base}/static/modular/admin/image/menu_03.png" alt="">车辆管理<i class="fa fa-angle-right"></i>
+                </a>
+                <ul class="second">
+                    <li><a href="javascript:void(0);">基础信息</a></li>
+                    <li><a href="javascript:void(0);">车辆维护</a></li>
+                    <li><a href="javascript:void(0);">车辆调度</a></li>
+                    <li><a href="javascript:void(0);">车辆监管</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0);">
+                    <img src="${base}/static/modular/admin/image/menu_04.png" alt="">实时监控<i class="fa fa-angle-right"></i>
+                </a>
+                <ul class="second">
+                    <li><a href="javascript:void(0);">1</a></li>
+                    <li><a href="javascript:void(0);">2</a></li>
+                    <li><a href="javascript:void(0);">3</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0);">
+                    <img src="${base}/static/modular/admin/image/menu_05.png" alt="">环卫设施<i class="fa fa-angle-right"></i>
+                </a>
+                <ul class="second">
+                    <li><a href="javascript:void(0);">1</a></li>
+                    <li><a href="javascript:void(0);">2</a></li>
+                    <li><a href="javascript:void(0);">3</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0);">
+                    <img src="${base}/static/modular/admin/image/menu_06.png" alt="">业绩考核<i class="fa fa-angle-right"></i>
+                </a>
+                <ul class="second">
+                    <li><a href="javascript:void(0);">1</a></li>
+                    <li><a href="javascript:void(0);">2</a></li>
+                    <li><a href="javascript:void(0);">3</a></li>
+                </ul>
+            </li>
+        </ul>-->
+        <ul class="layui-nav layui-nav-tree" lay-filter="leftNav">
+            <#list titles as title>
+                <#if !title.children??>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;" data-url="${base}${title.url}" data-id='${title.id}' data-text="${title.name}"><i class="iconfont">&#xe603;</i>${title.name}</a>
+                    </li>
+                <#else>
+                    <li class="layui-nav-item layui-nav-itemed">
+                        <a href="javascript:;"><i class="iconfont">&#xe607;</i>${title.name}</a>
+                            <dl class="layui-nav-child">
+                                <#list title.children as subTitle>
+                            <#if !subTitle.children??>
+                                <dd>
+                                    <a href="javascript:;" data-url="${base}${subTitle.url}" data-id='${subTitle.id}' data-text="${subTitle.name}"><span class="l-line"></span>${subTitle.name}</a></dd>
+                                </#if>
+                            </#list>
+                        </dl>
+                    </li>
+                </#if>
+            </#list>
+        </ul>
+    </div>
+    <div class="main-layout-container">
+        <!--左侧主体-->
+        <#include "${base}/modular/admin/common/right.html"/>
+    </div>
+    <!--遮罩-->
+    <div class="main-mask">
+
+    </div>
+</div>
+</body>
+</html>
+<script>
+    //一级主菜单
+    // $(".layui-nav>li>a").click(function(){
+    //     $(this).next().slideDown().parent().siblings().children('ul').slideUp();
+    //     $(this).children('i').removeClass('fa-angle-right').addClass('fa-angle-down');
+    //     $(this).parent().siblings().children('a').children('i').removeClass('fa-angle-down').addClass('fa-angle-right');
+    //     $(this).addClass('a-style').parent().siblings().children('a').removeClass('a-style');
+    //     $(this).next().children().children('a').removeClass('a-style');
+    //     $(this).parent().siblings().children('ul').children().children('a').removeClass('a-style');
+    // });
+    //二级子菜单
+    // $(".second>li>a").click(function(){
+    //     $(this).addClass('a-style').parent().siblings().children('a').removeClass('a-style');
+    //     $(this).parent().parent().siblings().removeClass('a-style');
+    // });
+</script>

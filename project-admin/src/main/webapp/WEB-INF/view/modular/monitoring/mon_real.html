@@ -1,0 +1,117 @@
+<#include "${base}/modular/admin/common/public.html"/>
+<html lang="en">
+<@header title="车辆监管" keywords="车辆监管">
+<link rel="stylesheet" href="${basePath}/static/common/css/bootstrap.css">
+<link rel="stylesheet" href="${base}/static/common/font-awesome-4.7.0/css/font-awesome.css">
+<link rel="stylesheet" href="${base}/static/modular/monitoring/css/mon_real.css">
+<script type="text/javascript" src="${base}/static/common/js/jquery-3.3.1.js" charset="utf-8"></script>
+<script type="text/javascript" src="${basePath}/static/common/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${basePath}/static/modular/monitoring/js/mon_real.js"></script>
+</@header>
+<@body>
+    <div class="left">
+        <div class="video">
+            <div class="page"></div>
+            <div class="msg">
+                <span class="carID">渝A 888888</span>
+                <span class="date">2019-1-23 14:31:09</span>
+            </div>
+        </div>
+        <div class="video">
+            <div class="page"></div>
+            <div class="msg">
+                <span class="carID">渝A 888888</span>
+                <span class="date">2019-1-23 14:31:09</span>
+            </div>
+        </div>
+        <div class="video">
+            <div class="page"></div>
+            <div class="msg">
+                <span class="carID">渝A 888888</span>
+                <span class="date">2019-1-23 14:31:09</span>
+            </div>
+        </div>
+        <div class="video">
+            <div class="page"></div>
+            <div class="msg">
+                <span class="carID">渝A 888888</span>
+                <span class="date">2019-1-23 14:31:09</span>
+            </div>
+        </div>
+    </div>
+    <div class="right">
+        <div class="input-group">
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="txt">
+                    车辆
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="javascript:void(0)">宝马</a></li>
+                    <li><a href="javascript:void(0)">奔驰</a></li>
+                    <li><a href="javascript:void(0)">奥迪</a></li>
+                </ul>
+            </div>
+            <input type="text" class="form-control">
+            <div class="input-group-addon" style="cursor: pointer">搜索</div>
+        </div>
+        <br>
+        <ul class="tree">
+            <li>
+                <a href="javascript:void(0)"><i class="fa fa-plus-square-o"></i>江北区</a>
+                <ul class="tree-two hide">
+                    <li>
+                        <a href="javascript:void(0)"><i class="fa fa-plus-square-o"></i>车辆</a>
+                        <ul class="tree-three hide">
+                            <li>
+                                <a href="javascript:void(0)"><i class="fa fa-cab"></i>渝A 888888</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)"><i class="fa fa-cab"></i>渝A 888888</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><i class="fa fa-plus-square-o"></i>摄像头</a>
+                        <ul class="tree-three hide">
+                            <li>
+                                <a href="javascript:void(0)"><i class="fa fa-video-camera"></i>滨江路</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)"><i class="fa fa-video-camera"></i>三里屯</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0)"><i class="fa fa-plus-square-o"></i>渝北区</a>
+                <ul class="tree-two hide">
+                    <li>
+                        <a href="javascript:void(0)"><i class="fa fa-plus-square-o"></i>车辆</a>
+                        <ul class="tree-three hide">
+                            <li>
+                                <a href="javascript:void(0)"><i class="fa fa-cab"></i>渝A 888888</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)"><i class="fa fa-cab"></i>渝A 888888</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><i class="fa fa-plus-square-o"></i>摄像头</a>
+                        <ul class="tree-three hide">
+                            <li>
+                                <a href="javascript:void(0)"><i class="fa fa-video-camera"></i>滨江路</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)"><i class="fa fa-video-camera"></i>三里屯</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</@body>
+</html>

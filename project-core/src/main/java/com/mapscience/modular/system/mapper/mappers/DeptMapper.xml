@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapscience.modular.system.mapper.DeptMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.mapscience.modular.system.model.Dept">
+        <id column="id" property="id"/>
+        <result column="num" property="num"/>
+        <result column="pid" property="pid"/>
+        <result column="pids" property="pids"/>
+        <result column="simplename" property="simplename"/>
+        <result column="fullname" property="fullname"/>
+        <result column="tips" property="tips"/>
+        <result column="version" property="version"/>
+    </resultMap>
+
+    <select id="tree" resultType="com.mapscience.core.node.ZTreeNode">
+		select id,pid as pId,simplename as name,
+		(
+		CASE
+		WHEN (pId = '0' OR pId IS NULL) THEN
+		'true'
+		ELSE
+		'false'
+		END
+		) as isOpen from sys_dept
+	</select>
+
+    <select id="list" resultType="java.util.Map">
+        select * from sys_dept
+        <if test="condition != null and condition != ''">
+            where simplename like CONCAT('%',#{condition},'%') or fullname like CONCAT('%',#{condition},'%')
+        </if>
+        order by create_time DESC
+    </select>
+
+    <select id="getDeptList" resultType="com.mapscience.modular.system.model.Dept">
+        select id,fullname from sys_dept
+    </select>
+
+    <insert id="addDept" parameterType="com.mapscience.modular.system.model.Dept">
+        INSERT INTO sys_dept(ID, num, pid, pids, simplename, fullname, tips)
+        VALUES (#{id},#{num},#{pid},#{pids},#{simplename},#{fullname},#{tips})
+    </insert>
+
+    <select id="getDeptById" resultType="com.mapscience.modular.system.model.Dept">
+        select ID, num, pid, pids, simplename, fullname, tips from sys_dept where id = #{id}
+    </select>
+
+    <delete id="delDept">
+        DELETE FROM sys_dept WHERE ID = #{id} OR pids like CONCAT('%[',#{id},']%')
+    </delete>
+
+    <update id="updateDept" parameterType="com.mapscience.modular.system.model.Dept" >
+        UPDATE sys_dept SET num=#{num},pid=#{pid},pids=#{pids},simplename=#{simplename},fullname=#{fullname},
+          tips=#{tips} WHERE ID=#{id}
+    </update>
+
+</mapper>

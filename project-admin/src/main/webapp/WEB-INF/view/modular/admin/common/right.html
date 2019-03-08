@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理</title>
+    <style>
+        .change a,
+        .change .layui-nav-item a {
+            color: #555;
+        }
+
+        .time {
+            height: 60px;
+            line-height: 60px;
+            padding: 0 10px;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<!--右侧内容-->
+    <!--头部-->
+    <div class="main-layout-header change">
+        <div class="menu-btn" id="hideBtn">
+            <a href="javascript:;">
+                <span class="iconfont">&#xe60e;</span>
+            </a>
+        </div>
+        <div class="time"></div>
+        <ul class="layui-nav" lay-filter="rightNav">
+            <li class="layui-nav-item"><a href="javascript:void(0);" id="toIndex">首页</a></li>
+            <li class="layui-nav-item"><a href="${base}/toBigScreen">返回控制台</a></li>
+            <li class="layui-nav-item"><a href="${base}/logout">退出</a></li>
+        </ul>
+    </div>
+    <!--主体内容-->
+    <div class="main-layout-body">
+        <!--tab 切换-->
+        <div class="layui-tab layui-tab-brief main-layout-tab" lay-filter="tab" lay-allowClose="true">
+            <ul class="layui-tab-title">
+                <li class="layui-this welcome">后台主页</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show" style="background: #f5f5f5;">
+                    <!--1-->
+                    <iframe id="iframe" src="${base}/overview/index" width="100%" height="100%" name="iframe" scrolling="auto" class="iframe" framborder="0"></iframe>
+                    <!--1end-->
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    $(function(){
+        //当前时间
+        setInterval(function() {
+            var date = new Date();
+
+            var yy = date.getFullYear(); //年
+            var MM = date.getMonth() + 1; //月
+            var dd = date.getDate(); //日
+            var hh = date.getHours(); //时
+            var mm = date.getMinutes(); //分
+            var ss = date.getSeconds(); //秒
+            var week = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六")[date.getDay()]; //星期
+
+            if (hh < 10) {
+                hh = "0" + hh;
+            }
+            if (mm < 10) {
+                mm = "0" + mm;
+            }
+            if (ss < 10) {
+                ss = "0" + ss;
+            }
+
+            $(".time").html(yy + "年" + MM + "月" + dd + "日" + '&nbsp; &nbsp;'+ week + "&nbsp; &nbsp;" + hh + ":" + mm + ":" + ss);
+
+        }, 1000);
+        $("#toIndex").click(function () {
+           $(".welcome").click();
+        })
+    });
+
+</script>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapscience.modular.facilities.mapper.FacStockMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.mapscience.modular.facilities.model.FacStock">
+        <id column="id" property="id" />
+        <result column="fac_id" property="facId" />
+        <result column="fac_numer" property="facNumer" />
+        <result column="fac_type" property="facType" />
+        <result column="fac_address" property="facAddress" />
+        <result column="fac_manager" property="facManager" />
+        <result column="create_time" property="createTime" />
+        <result column="version" property="version" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, fac_id, fac_numer, fac_type, fac_address, fac_manager, create_time, version
+    </sql>
+
+    <select id="selectPageList" resultMap="BaseResultMap" parameterType="com.baomidou.mybatisplus.plugins.Page">
+        SELECT
+               M.id, I.fac_name AS fac_id, M.fac_numer, M.fac_type, M.fac_address, S.name as fac_manager, M.create_time
+        FROM
+             FAC_STOCK M,
+             FAC_INFO I,
+             SYS_USER S
+        WHERE M.FAC_ID = I.ID AND M.fac_manager = S.ID
+        <if test="facName != null and facName != ''">
+            AND I.FAC_NAME LIKE CONCAT('%',#{facName},'%')
+        </if>
+        <if test="facType != null and facType != ''">
+            AND M.FAC_TYPE LIKE CONCAT('%',#{facType},'%')
+        </if>
+    </select>
+
+    <update id="updateFacNumer">
+        update FAC_STOCK set fac_numer = #{facNumer},version = version + 1 where id = #{id} and version = #{version}
+    </update>
+
+    <select id="selectFacStockByfacId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM FAC_STOCK WHERE fac_id = #{facId}
+    </select>
+
+    <select id="selectStockAndFacName" resultType="java.util.Map">
+        SELECT S.id, S.fac_address as address, I.fac_name as name FROM FAC_STOCK S,FAC_INFO I WHERE S.FAC_ID = I.ID
+    </select>
+
+</mapper>

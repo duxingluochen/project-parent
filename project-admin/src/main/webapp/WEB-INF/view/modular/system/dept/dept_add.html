@@ -1,0 +1,48 @@
+<#include "${base}/modular/admin/common/public.html"/>
+<@header title="添加部门" keywords="添加部门">
+<script type="text/javascript" src="${base}/static/modular/system/dept/dept_add.js"></script>
+</@header>
+<@body>
+<div class="layui-tab page-content-wrap">
+    <div class="layui-tab-item layui-show">
+        <form class="layui-form layui-form-pane" style="width: 90%;padding-top: 20px;">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">部门简称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="simplename" autocomplete="off" class="layui-input" value="${deptInfo.simplename}" lay-verify="required">
+                    </div>
+                    <label class="layui-form-label">部门全称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="fullname" autocomplete="off" class="layui-input" value="${deptInfo.fullname}" lay-verify="required">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">上级部门</label>
+                    <div class="layui-input-inline">
+                        <select name="pid" id="pid" lay-filter="pid" lay-search>
+                            <option value="0">请选择..</option>
+                            <#list dept as i>
+                                <option value="${i.id}">${i.fullname}</option>
+                            </#list>
+                        </select>
+                    </div>
+                    <label class="layui-form-label">备注</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="tips" id="tips" class="layui-input" value="${deptInfo.tips}">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <input class="layui-btn" lay-filter="adddept" lay-submit="" value="立即提交"/>
+                </div>
+            </div>
+            <input type="text" id="id" name="id" autocomplete="off" class="layui-input layui-hide" value="${deptInfo.id}">
+        </form>
+        <input type="text" id="pidval" autocomplete="off" class="layui-input layui-hide" value="${deptInfo.pid}">
+    </div>
+</div>
+</@body>

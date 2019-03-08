@@ -1,0 +1,49 @@
+<#include "${base}/modular/admin/common/public.html"/>
+<@header title="设施基础信息" keywords="设施基础信息">
+<script type="text/javascript" src="${base}/static/modular/facilities/facInfo/js/facilitiesList.js"></script>
+</@header>
+<@body>
+<div class="wrap-container clearfix">
+    <!--<div class="ibox-title">
+        <h5>设施基础信息</h5>
+    </div>-->
+    <div class="column-content-detail">
+        <form class="layui-form layui-form-pane" action="">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">设施名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="facName" name="facName" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">设施类型</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="facType" name="facType" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <a class="layui-btn layui-btn-normal" onclick="Facilities.search()">搜索</a>
+                </div>
+            </div>
+        </form>
+        <div class="layui-form" id="table-list">
+            <table class="layui-table" lay-even lay-skin="nob" id="facilitiesList" lay-filter="facilitiesList">
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="toolbarFac">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="add">
+            <i class="layui-icon">&#xe654;</i>添加设施
+        </button>
+    </div>
+</script>
+
+<script type="text/html" id="facbar">
+    <button class="layui-btn layui-btn-xs" lay-event="edit">编辑</button>
+    <button class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</button>
+</script>
+</@body>

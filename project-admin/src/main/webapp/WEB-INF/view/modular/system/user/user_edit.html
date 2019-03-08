@@ -1,0 +1,154 @@
+<#include "${base}/modular/admin/common/public.html"/>
+<@header title="添加用户" keywords="添加用户">
+<script type="text/javascript" src="${base}/static/modular/system/user/js/user_edit.js"></script>
+<script type="text/javascript">
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+        laydate.render({
+            elem: '#birthday' //指定元素
+        });
+    });
+</script>
+</@header>
+<@body>
+<div class="layui-tab page-content-wrap">
+    <div class="layui-tab-item layui-show">
+        <div class="layui-upload">
+            <div class="layui-upload-list">
+                <img class="layui-upload-img" id="headimg" style="width: 60px; height: 60px;" src="${httpPath}${pic.picPath}" onerror="this.src='${base}/static/modular/system/user/images/头像占位图.jpg'">
+                <span id="demoText"></span>
+                <button type="button" class="layui-btn" id="imgbtn">上传头像</button>
+            </div>
+        </div>
+        <form class="layui-form layui-form-pane" style="width: 90%;padding-top: 20px;">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">角色<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <!--<input type="text" name="roleid" lay-verify="" autocomplete="off" class="layui-input">-->
+                        <input type="text" name="roleSel" id="roleSel" readonly="readonly" lay-verify="required"
+                               onclick="UserEdit.showRoleSelectTree()" autocomplete="off"
+                               class="layui-input">
+                        <input type="hidden" id="roleid" name="roleid">
+                        <!--角色选择下拉框-->
+                        <div id="roleContent" class="roleContent" style=" display: none;position: absolute; z-index: 200;
+                                background-color: rgb(248,248,248); box-shadow: #666 0px 0px 10px;">
+                            <ul id="roletree" class="ztree tree-box" style="width: 249px !important;"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">姓名<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="name" autocomplete="off" class="layui-input" lay-verify="required" value="${user.name}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">性别<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <select name="sex" id="sex">
+                            <option value=1>男</option>
+                            <option value=2>女</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">出生日期<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="birthday" id="birthday" class="layui-input" lay-verify="required" value="${(user.birthday?string('yyyy-MM-dd'))!}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">部门<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="citySel" id="citySel" readonly="readonly" lay-verify="required"
+                               onclick="UserEdit.showDeptSelectTree()" autocomplete="off"
+                               class="layui-input">
+                        <input type="hidden" id="deptid" name="deptid" value="${user.deptid}">
+                        <!--部门选择下拉框-->
+                        <div id="menuContent" class="menuContent"
+                             style=" display: none;position: absolute; z-index: 200; background-color: rgb(248,248,248); box-shadow: #666 0px 0px 10px;" >
+                            <ul id="tree" class="ztree tree-box" style="width: 249px !important;"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">邮箱<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="email" lay-verify="email|" autocomplete="on"
+                               class="layui-input" value="${user.email}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">电话<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="phone" lay-verify="phone" autocomplete="on"
+                               class="layui-input" value="${user.phone}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">身份证号<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="id_number" lay-verify="identity" autocomplete="on" class="layui-input" value="${user.id_number}">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item driver" style="display:none;">
+                <div class="layui-inline">
+                    <label class="layui-form-label">驾驶证号<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="licenseNumber" autocomplete="on" class="layui-input driver-required" value="${driver.licenseNumber}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">驾照类型<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="vehicleTypeSel" id="vehicleTypeSel" readonly="readonly" lay-verify="required"
+                               onclick="UserEdit.showVehicleTypeSelectTree()" autocomplete="off"
+                               class="layui-input driver-required">
+                        <input type="hidden" id="vehicleType" name="vehicleType" value="${driver.vehicleType}">
+                        <!--驾照类型选择下拉框-->
+                        <div id="vehicleTypeContent" class="vehicleTypeContent"style=" display: none;position: absolute; z-index: 200;
+                                background-color: rgb(248,248,248); box-shadow: #666 0px 0px 10px; height: 130px; overflow: auto">
+                            <ul id="vehicleTypeTree" class="ztree tree-box" style="width: 249px !important;"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">驾龄<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="drivingAge" autocomplete="on" class="layui-input driver-number" value="${driver.drivingAge}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">违章次数<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="peccancyTimes" autocomplete="on" class="layui-input driver-number" value="${driver.peccancyTimes}">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <input class="layui-btn" lay-filter="adduser" lay-submit="" value="立即提交"/>
+                </div>
+            </div>
+            <!--用户id-->
+            <input type="hidden" name="id" id="id" class="layui-input" value="${user.id}">
+            <!--头像-->
+            <input type="hidden" name="avatar" id="avatar" class="layui-input" value="${user.avatar}">
+            <!--账户-->
+            <input type="hidden" name="account" id="account" class="layui-input" value="${user.account}">
+            <!--密码-->
+            <input type="hidden" name="password" id="password" class="layui-input" value="${user.password}">
+            <!--盐-->
+            <input type="hidden" name="salt" id="salt" class="layui-input" value="${user.salt}">
+            <!--状态-->
+            <input type="hidden" name="status" id="status" class="layui-input" value="${user.status}">
+            <!--司机id-->
+            <input type="hidden" name="driverId" id="driverId" class="layui-input" value="${driver.id}">
+        </form>
+        <!--性别值-->
+        <input type="hidden" id="sexVal" class="layui-input" value="${user.sex}">
+    </div>
+</div>
+</@body>

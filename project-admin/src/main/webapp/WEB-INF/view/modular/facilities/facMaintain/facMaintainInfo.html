@@ -1,0 +1,68 @@
+<#include "${base}/modular/admin/common/public.html"/>
+<@header title="添加设备维护申请" keywords="添加设备维护申请">
+<script type="text/javascript" src="${base}/static/modular/facilities/facMaintain/js/facMaintainInfo.js"></script>
+</@header>
+<@body>
+<div class="layui-tab page-content-wrap">
+    <div class="layui-tab-item layui-show">
+        <form class="layui-form layui-form-pane" style="padding-top: 20px;">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">设施名<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <select name="facId" id="facId" lay-verify="required" lay-search>
+                            <option value="">请选择..</option>
+                            <#list facList as i>
+                                <option value="${i.id}">${i.facName}</option>
+                            </#list>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">维护价格<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="tainPrice" autocomplete="off" class="layui-input" value="${facMaintain.tainPrice}" lay-verify="required|validateMoney">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="height: 100px;">维护内容<span style="color: red">*</span></label>
+                    <textarea placeholder="请输入内容" name="tainContent" lay-verify="required" class="layui-textarea" style="width: 71%">${facMaintain.tainContent}</textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-inline" style="width: 300px">
+                    <div class="layui-upload">
+                        维护前照片：
+                        <img class="layui-upload-img" id="beforeimg" style="width: 80px; height: 80px;" src="${httpPath}${picBefore.picPath}"
+                             onerror="this.src='${base}/static/common/image/picImg.png'" onclick="showBigImg(this)"/>
+                        <button type="button" class="layui-btn edit-btn" id="beforebtn" hidden>上传照片</button>
+                        <span id="before"></span>
+                    </div>
+                </div>
+                <div class="layui-input-inline" style="width: 300px">
+                    <div class="layui-upload">
+                        维护后照片：
+                        <img class="layui-upload-img" id="afterimg" style="width: 80px; height: 80px;"  src= "${httpPath}${picAfter.picPath}"
+                             onerror="this.src='${base}/static/common/image/picImg.png'" onclick="showBigImg(this)"/>
+                        <button type="button" class="layui-btn edit-btn" id="afterbtn" hidden>上传照片</button>
+                        <span id="after"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item edit-btn" hidden>
+                <div class="layui-input-block">
+                    <input class="layui-btn" lay-filter="add" lay-submit="" value="立即提交"/>
+                </div>
+            </div>
+            <input type="text" class="layui-input layui-hide" name="id" id="id" value="${facMaintain.id}">
+            <input type="text" class="layui-input layui-hide" name="version" id="version" value="${facMaintain.version}">
+            <input type="text" class="layui-input layui-hide" lay-verify="beforePhotos" name="beforePhotos" id="beforePhotos" value="${facMaintain.beforePhotos}">
+            <input type="text" class="layui-input layui-hide" lay-verify="afterPhotos" name="afterPhotos" id="afterPhotos" value="${facMaintain.afterPhotos}">
+        </form>
+        <!--设施id值-->
+        <input type="hidden" id="facIdVal" class="layui-input" value="${facMaintain.facId}">
+        <!--是否可编辑-->
+        <input type="hidden" id="edit" class="layui-input" value="${edit}">
+    </div>
+</div>
+</@body>

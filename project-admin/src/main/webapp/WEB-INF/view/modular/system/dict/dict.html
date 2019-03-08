@@ -1,0 +1,32 @@
+<#include "${base}/modular/admin/common/public.html"/>
+<@header title="字典管理" keywords="字典管理">
+<script type="text/javascript" src="${base}/static/modular/system/dict/dict.js"></script>
+</@header>
+<@body>
+<div class="wrap-container clearfix">
+    <div class="ibox-title">
+        <h5>字典管理</h5>
+    </div>
+    <div class="column-content-detail">
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+                <div class="layui-inline tool-btn">
+                    <button class="layui-btn layui-btn-small layui-btn-normal addBtn" data-url="article-add.html"><i class="layui-icon">&#xe654;</i></button>
+                    <button class="layui-btn layui-btn-small layui-btn-danger delBtn"  data-url="article-add.html"><i class="layui-icon">&#xe640;</i></button>
+                    <button class="layui-btn layui-btn-small layui-btn-warm listOrderBtn hidden-xs" data-url="article-add.html"><i class="iconfont">&#xe656;</i></button>
+                </div>
+                <div class="layui-inline">
+                    <input type="text" name="title" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-inline">
+                </div>
+                <button class="layui-btn layui-btn-normal" lay-submit="search">搜索</button>
+            </div>
+        </form>
+        <div class="layui-form" id="table-list">
+            <table class="layui-table" lay-even lay-skin="nob" id="dictList">
+            </table>
+        </div>
+    </div>
+</div>
+</@body>

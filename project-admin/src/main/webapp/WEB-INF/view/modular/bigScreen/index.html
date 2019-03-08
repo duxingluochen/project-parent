@@ -1,0 +1,104 @@
+<#assign base=request.contextPath />
+<#include "${base}/modular/admin/common/public.html"/>
+<@header>
+    <base id="base" href="${base}">
+    <meta charset="UTF-8">
+    <title>智慧环卫首页</title>
+    <link rel="stylesheet" href="${base}/static/modular/bigScreen/css/index.css">
+    <script type="text/javascript" src="${base}/static/common/js/jquery.min.js"></script>
+    <script type="text/javascript" src="${base}/static/common/js/echarts.min.js"></script>
+    <script type="text/javascript" src="${base}/static/modular/bigScreen/js/index.js"></script>
+    <script>
+        var rootPath = '${base}'
+    </script>
+</@header>
+<@body>
+<div class="btn-opt">
+    <a href="${base}/overview/toCentre">指挥中心</a>&nbsp;
+    <a href="${base}/index">后台管理</a>
+</div>
+<div class="head">
+    <div class="head-left">
+        <span class="ymd" id="time1">2018年12月11日</span>
+        <img class="icon" src="${base}/static/modular/bigScreen/image/head-icon.png" alt="">
+        <img class="mid" src="${base}/static/modular/bigScreen/image/head-left.png" alt="">
+        <img class="icon2" src="${base}/static/modular/bigScreen/image/head-icon2.png" alt="">
+        <div class="move" id="carl">
+            <img class="move-to hover" id="one0" onmouseover="setTab('one',0,4)" src="${base}/static/modular/bigScreen/image/head-icon2.png" alt="">
+            <img class="move-to" id="one1" onmouseover="setTab('one',1,4)" src="${base}/static/modular/bigScreen/image/head-icon.png" alt="">
+            <img class="move-to" id="one2" onmouseover="setTab('one',2,4)" src="${base}/static/modular/bigScreen/image/head-icon.png" alt="">
+            <img class="move-to" id="one3" onmouseover="setTab('one',3,4)" src="${base}/static/modular/bigScreen/image/head-icon.png" alt="">
+        </div>
+    </div>
+    <div class="head-center">
+        <img src="${base}/static/modular/bigScreen/image/title.png" alt="">
+    </div>
+    <div class="head-right">
+        <span class="ymd" id="time2">星期二 15:36:24</span>
+        <img class="icon" src="${base}/static/modular/bigScreen/image/head-icon2.png" alt="">
+        <img class="mid" src="${base}/static/modular/bigScreen/image/head-right.png" alt="">
+        <img class="icon2" src="${base}/static/modular/bigScreen/image/head-icon.png" alt="">
+        <div class="move2">
+            <img class="move-to hover" id="two0" onmouseover="setTab('two',0,4)" src="${base}/static/modular/bigScreen/image/head-icon2.png" alt="">
+            <img class="move-to" id="two1" onmouseover="setTab('two',1,4)" src="${base}/static/modular/bigScreen/image/head-icon.png" alt="">
+            <img class="move-to" id="two2" onmouseover="setTab('two',2,4)" src="${base}/static/modular/bigScreen/image/head-icon.png" alt="">
+            <img class="move-to" id="two3" onmouseover="setTab('two',3,4)" src="${base}/static/modular/bigScreen/image/head-icon.png" alt="">
+        </div>
+    </div>
+</div>
+<div class="cont">
+    <div class="left">
+        <div>
+            <div class="line">
+                <span class="text">当日油水耗用量</span>
+                <img src="${base}/static/modular/bigScreen/image/line.png" alt="">
+            </div>
+            <div class="page" id="dwc"></div>
+        </div>
+        <div>
+            <div class="line">
+                <span class="text">当日到岗人数与未到岗人数占比</span>
+                <img src="${base}/static/modular/bigScreen/image/line.png" alt="">
+            </div>
+            <div class="page" id="duty"></div>
+        </div>
+        <div>
+            <div class="line">
+                <span class="text">报警次数</span>
+                <img src="${base}/static/modular/bigScreen/image/line.png" alt="">
+            </div>
+            <div class="page" id="alarm"></div>
+        </div>
+    </div>
+    <div class="center">
+        <div class="text">环卫点总数<span id="number">42593</span></div>
+        <div class="map" id="map"></div>
+    </div>
+    <div class="right">
+        <div>
+            <div class="line">
+                <span class="text">人工成本</span>
+                <img src="${base}/static/modular/bigScreen/image/line.png" alt="">
+            </div>
+            <div class="page" id="labor"></div>
+        </div>
+        <div>
+            <div class="line">
+                <span class="text">油耗成本</span>
+                <img src="${base}/static/modular/bigScreen/image/line.png" alt="">
+            </div>
+            <div class="page" id="fuel"></div>
+        </div>
+        <div>
+            <div class="line">
+                <span class="text">巡检统计</span>
+                <img src="${base}/static/modular/bigScreen/image/line.png" alt="">
+            </div>
+            <div class="page" id="inspection"></div>
+        </div>
+    </div>
+</div>
+</@body>
+<link rel="stylesheet" href="http://192.168.1.154/arcgis_js_api/library/3.9/3.9/js/esri/css/esri.css"/>
+<script type="text/javascript" src="http://192.168.1.154/arcgis_js_api/library/3.9/3.9/init.js"></script>
+<script type="text/javascript" src="${base}/static/modular/bigScreen/js/index_map.js"></script>

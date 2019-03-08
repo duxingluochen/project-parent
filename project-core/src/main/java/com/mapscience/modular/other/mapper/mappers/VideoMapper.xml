@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapscience.modular.other.mapper.VideoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.mapscience.modular.other.model.Video">
+        <id column="id" property="id" />
+        <result column="vid_name" property="vidName" />
+        <result column="vid_newname" property="vidNewname" />
+        <result column="vid_path" property="vidPath" />
+        <result column="vid_size" property="vidSize" />
+        <result column="vid_suffix" property="vidSuffix" />
+        <result column="vid_type" property="vidType" />
+        <result column="uploader" property="uploader" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, vid_name, vid_newname, vid_path, vid_size, vid_suffix, vid_type, uploader, create_time
+    </sql>
+
+</mapper>

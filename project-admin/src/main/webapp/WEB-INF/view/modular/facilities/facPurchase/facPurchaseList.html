@@ -1,0 +1,30 @@
+<#include "${base}/modular/admin/common/public.html"/>
+<@header title="设施采购" keywords="设施采购">
+<script type="text/javascript" src="${base}/static/modular/facilities/facPurchase/js/facPurchaseList.js"></script>
+</@header>
+<@body>
+<div class="wrap-container clearfix">
+    <div class="ibox-title">
+        <h5>设施采购</h5>
+    </div>
+    <div class="column-content-detail">
+        <form class="layui-form layui-form-pane" action="">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">设施名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="facName" name="facName" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <a class="layui-btn layui-btn-normal" onclick="FacPurchase.search()">搜索</a>
+                </div>
+            </div>
+        </form>
+        <div class="layui-form" id="table-list">
+            <table class="layui-table" lay-even lay-skin="nob" id="facPurchaseList" lay-filter="facPurchaseList">
+            </table>
+        </div>
+    </div>
+</div>
+</@body>

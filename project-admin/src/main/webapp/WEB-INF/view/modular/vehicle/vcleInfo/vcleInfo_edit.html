@@ -1,0 +1,155 @@
+<#include "${base}/modular/admin/common/public.html"/>
+<@header title="车辆详情" keywords="车辆详情">
+<script type="text/javascript" src="${base}/static/modular/vehicle/vcleInfo/js/vcleInfo_edit.js"></script>
+<script type="text/javascript" src="${base}/static/common/js/echarts.min.js"></script>
+</@header>
+<script type="text/javascript">
+    var vcleId = '${vcleId }';
+    var httpPath = '${httpPath}'
+</script>
+<@body>
+<div class="layui-tab page-content-wrap">
+    <div class="layui-tab-item layui-show">
+        <form class="layui-form layui-form-pane">
+            <div class="layui-row">
+                <div class="layui-form-item layui-col-xs8" style="width: 650px;">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">车辆名称</label>
+                        <div class="layui-input-inline">
+                            <select name="vcleName" id="vcleName" lay-verify="required">
+                                <option value="">请选择...</option>
+                                <option value="压缩式垃圾车">压缩式垃圾车</option>
+                                <option value="非压缩式垃圾车">非压缩式垃圾车</option>
+                                <option value="餐厨垃圾运输车">餐厨垃圾运输车</option>
+                                <option value="清洗扫地车">清洗扫地车</option>
+                                <option value="扫地车">扫地车</option>
+                                <option value="高压清洗车">高压清洗车</option>
+                                <option value="清洗车">清洗车</option>
+                                <option value="护栏清洗车">护栏清洗车</option>
+                                <option value="路面养护车">路面养护车</option>
+                                <option value="抑尘车">抑尘车</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">车牌号</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="plateNumber" id="plateNumber" autocomplete="off"
+                                   class="layui-input"
+                                   lay-verify="required">
+                        </div>
+                    </div>
+                    <!--                <div class="layui-inline">
+                                        <label class="layui-form-label">发动机号</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" name="engineNumber" id="engineNumber" autocomplete="off" class="layui-input" lay-verify="required" >
+                                        </div>
+                                    </div>-->
+                    <div class="layui-inline">
+                        <label class="layui-form-label">作业类型</label>
+                        <div class="layui-input-inline">
+                            <select name="operationType" id="operationType" lay-verify="required">
+                                <option value="">请选择...</option>
+                                <option value="垃圾运输车">垃圾运输车</option>
+                                <option value="扫地车">扫地车</option>
+                                <option value="清洗车">清洗车</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">部门<span style="color: red">*</span></label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="deptSel" id="deptSel" readonly="readonly" lay-verify="required"
+                                   onclick="VcleInfo.showDeptSelectTree()" autocomplete="off"
+                                   class="layui-input">
+                            <input type="hidden" id="department" name="department">
+                            <!--部门选择下拉框-->
+                            <div id="menuContent" class="menuContent"
+                                 style=" display: none;position: absolute; z-index: 200; background-color: rgb(248,248,248); box-shadow: #666 0px 0px 10px;">
+                                <ul id="tree" class="ztree tree-box" style="width: 249px !important;"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">品牌型号</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="brandModel" id="brandModel" autocomplete="off" class="layui-input"
+                                   lay-verify="required">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">载重（吨）</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="deadweight" id="deadweight" autocomplete="off" class="layui-input"
+                                   lay-verify="required">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">用油型号</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="oilType" id="oilType" autocomplete="off" class="layui-input"
+                                   lay-verify="required">
+                        </div>
+                    </div>
+                    <!--                <div class="layui-inline">
+                                        <label class="layui-form-label">使用年限</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" name="serviceLife" id="serviceLife" autocomplete="off" class="layui-input" lay-verify="required" >
+                                        </div>
+                                    </div>-->
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 128px">上次年审时间</label>
+                        <div class="layui-input-inline" style="width: 172px">
+                            <input type="text" name="lastInspectionTime" id="lastInspectionTime" autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 128px">开始使用时间</label>
+                        <div class="layui-input-inline" style="width: 172px">
+                            <input type="text" name="startUsingTime" id="startUsingTime" autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">司机</label>
+                        <div class="layui-input-block" style="width: 190px;">
+                            <input type="text" id="driverName" class="layui-input"
+                                   style="position:absolute;z-index:2;width:100%;" lay-verify="required"
+                                   onFocus="VcleInfo.show()" onkeyup="VcleInfo.search()" autocomplete="off">
+                            <select id="hc_select" lay-filter="hc_select" autocomplete="off" class="layui-select"
+                                    lay-search>
+                                <option value="">暂无司机...</option>
+                                <#list driver as i>
+                                <option value="${i.id}">${i.userId}</option>
+                            </#list>
+                            </select>
+                        </div>
+                    </div>
+                    <!--隐藏字段-->
+                    <input type="hidden" name="id" id="id" autocomplete="off" class="layui-input">
+                    <input type="hidden" name="picture" id="picture" autocomplete="off" class="layui-input">
+                    <input type="hidden" name="driverId" id="driverId" autocomplete="off" class="layui-input">
+                    <input type="hidden" name="createTime" id="createTime" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-upload layui-col-xs4">
+                    <button type="button" class="layui-btn" id="uploadPic" style="width: 244px">修改车辆图片</button>
+                    <div class="layui-upload-list">
+                        <img class="layui-upload-img" id="vclePic" width="244" height="179"
+                             src="${base}/static/modular/vehicle/vcleInfo/images/占位图.png">
+                        <span id="demoText"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-xs6" id="oilChart" style="width: 980px;height: 328px"></div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block" style="margin-left: 40%">
+                    <input class="layui-btn" lay-filter="updateVcleInfo" lay-submit="" value="保存"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</@body>

@@ -1,0 +1,75 @@
+<#include "${base}/modular/admin/common/public.html"/>
+<@header title="添加设备使用" keywords="添加设备使用">
+<script type="text/javascript" src="${base}/static/modular/facilities/facUse/js/facUseInfo.js"></script>
+<script type="text/javascript">
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+        laydate.render({
+            elem: '#useTime' //指定元素
+            ,type: 'datetime'
+        });
+    });
+</script>
+</@header>
+<@body>
+<div class="layui-tab page-content-wrap">
+    <div class="layui-tab-item layui-show">
+        <div id="showMessage"></div>
+        <form class="layui-form layui-form-pane" style="padding-top: 20px;">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">设施名<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <select name="facstockId" id="facstockId" lay-filter="facstockId" lay-verify="required" lay-search>
+                            <option value="">请选择..</option>
+                            <#list facList as i>
+                                <option value="${i.id}">${i.name}/${i.address}</option>
+                            </#list>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">使用数量<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="useNumber" name="useNumber" autocomplete="off" class="layui-input" value="${facUse.useNumber}" lay-verify="required|number|validateUseNum">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">使用人<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <select name="userId" id="userId" lay-verify="required" lay-search>
+                            <option value="">请选择..</option>
+                            <#list user as i>
+                                <option value="${i.id}">${i.name}</option>
+                            </#list>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">使用时间<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="useTime" name="useTime" class="layui-input"
+                               lay-verify="required" placeholder="yyyy-MM-dd HH:mm:ss" value="${(facUse.useTime?string('yyyy-MM-dd HH:mm:ss'))!}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">使用说明</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="instructions" class="layui-input" value="${facUse.instructions}">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <input class="layui-btn" lay-filter="add" lay-submit="" value="立即提交"/>
+                </div>
+            </div>
+            <input type="text" name="id" id="id" class="layui-input layui-hide" value="${facUse.id}">
+        </form>
+        <!--设施id值-->
+        <input type="hidden" id="facstockIdVal" class="layui-input" value="${facUse.facstockId}">
+        <!--使用人id值-->
+        <input type="hidden" id="userIdVal" class="layui-input" value="${facUse.userId}">
+    </div>
+</div>
+</@body>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapscience.modular.facilities.mapper.FacPurchaseMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.mapscience.modular.facilities.model.FacPurchase">
+        <id column="id" property="id" />
+        <result column="fac_id" property="facId" />
+        <result column="pur_number" property="purNumber" />
+        <result column="pur_price" property="purPrice" />
+        <result column="pur_total_price" property="purTotalPrice" />
+        <result column="remark" property="remark" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, fac_id, pur_number, pur_price, pur_total_price, remark, create_time
+    </sql>
+
+    <select id="selectPageList" resultMap="BaseResultMap" parameterType="com.baomidou.mybatisplus.plugins.Page">
+        SELECT
+               M.id, I.fac_name AS fac_id, M.pur_number, M.pur_price, M.pur_total_price, M.remark, M.create_time
+        FROM
+             FAC_PURCHASE M,
+             FAC_INFO I
+        WHERE M.FAC_ID = I.ID
+        <if test="facName != null and facName != ''">
+            AND I.FAC_NAME LIKE CONCAT('%',#{facName},'%')
+        </if>
+        ORDER BY CREATE_TIME DESC
+    </select>
+
+</mapper>

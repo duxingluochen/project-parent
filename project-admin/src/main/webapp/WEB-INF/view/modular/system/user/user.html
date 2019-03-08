@@ -1,0 +1,104 @@
+<#include "${base}/modular/admin/common/public.html"/>
+<@header title="用户管理" keywords="用户管理">
+<link rel="stylesheet" href="${base}/static/modular/system/user/css/user.css">
+<script type="text/javascript" src="${base}/static/modular/system/user/js/user.js"></script>
+<style type="text/css">
+    .ztree li span.button.add {
+        margin-right: 2px;
+        background-position: -144px 0;
+        vertical-align: top;
+        *vertical-align: middle
+    }
+</style>
+</@header>
+<@body>
+<div class="wrap-container clearfix">
+    <div class="wrapper">
+        <div class="page">
+            <div class="title" style="">当前员工总数</div>
+            <div class="circle circle_01">
+                <img src="${base}/static/modular/admin/image/icon_01.png" alt="">
+            </div>
+            <div class="text">
+                <div class="number" id="total"><span>人</span></div>
+                <div class="bef bef_01"></div>
+            </div>
+        </div>
+        <div class="page">
+            <div class="chart" id="chartUserDept"></div>
+        </div>
+    </div>
+    <div class="column-content-detail">
+        <div class="row" id="table-list">
+            <div class="col-lg-2 col-sm-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">组织机构</div>
+                    <div class="panel-body dept-tree">
+                        <ul id="deptTree" class="ztree"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-10 col-sm-9">
+                <form class="layui-form layui-form-pane" action="">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">用户名</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="name" name="name" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">角色</label>
+                            <div class="layui-input-block">
+                                <select name="roleid" id="roleid" lay-filter="roleid" lay-search>
+                                    <option value="">请选择..</option>
+                                    <#list role as i>
+                                        <option value="${i.id}">${i.name}</option>
+                                    </#list>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <a class="layui-btn layui-btn-normal" onclick="User.search()">搜索</a>
+                        </div>
+                    </div>
+                    <button class="layui-btn role" style="display: none" data-url="${base}/user/user_add">
+                        <i class="layui-icon layui-icon-auz"></i>角色分配
+                    </button>
+                </form>
+                <table class="layui-table" lay-filter="userList" lay-even lay-skin="nob" id="userList">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="toolbarUser">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm layui-btn-normal"
+                lay-event="user_add">
+            <i class="layui-icon">&#xe654;</i>添加用户
+        </button>
+        <button class="layui-btn layui-btn-sm layui-btn-warm refresh hidden-xs" lay-event="refresh">
+            <i class="iconfont">&#xe656;</i>刷新
+        </button>
+        <button class="layui-btn layui-btn-sm" lay-event="role">
+            <i class="layui-icon layui-icon-auz"></i>角色分配
+        </button>
+        <button class="layui-btn layui-btn-sm resetpwd" lay-event="resetpwd">
+            <i class="layui-icon layui-icon-refresh-1"></i>重置密码
+        </button>
+        <!--<button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+        <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>-->
+    </div>
+</script>
+<script type="text/html" id="userbar">
+    {{# if(d.statusName=="启用"){}}
+    <button class="layui-btn layui-btn-xs" lay-event="forzen">冻结</button>
+    {{# }else { }}
+    <button class="layui-btn layui-btn-xs" lay-event="forzen">解除冻结</button>
+    {{# }}}
+    <button class="layui-btn layui-btn-xs" lay-event="edit">编辑</button>
+    <button class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</button>
+</script>
+</@body>

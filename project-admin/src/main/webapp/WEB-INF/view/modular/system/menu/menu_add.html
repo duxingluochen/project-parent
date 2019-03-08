@@ -1,0 +1,84 @@
+<#include "${base}/modular/admin/common/_container.html"/>
+<@header title="添加用户" keywords="添加用户">
+<script src="${base}/static/modular/system/menu/menu_info.js"></script>
+<script type="text/javascript">
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+        laydate.render({
+            elem: '#birthday' //指定元素
+        });
+    });
+</script>
+</@header>
+<@body>
+<div class="layui-tab page-content-wrap">
+    <div class="layui-tab-item layui-show">
+        <form class="layui-form layui-form-pane" style="width: 90%;padding-top: 20px;">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="name" autocomplete="off" class="layui-input">
+                    </div>
+                    <label class="layui-form-label">菜单编号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="code" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">父级编号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="pcodeName" id="pcodeName" readonly="readonly"
+                               onclick="MenuInfoDlg.showMenuSelectTree()" autocomplete="off"
+                               class="layui-input">
+                        <input type="hidden" id="pcode" name="pcode">
+                        <input type="hidden" id="levels" name="levels">
+                        <!--部门选择下拉框-->
+                        <div id="menuContent" class="menuContent"
+                             style=" display: none;position: absolute; z-index: 200;">
+                            <ul id="tree" class="ztree tree-box" style="width: 249px !important;"></ul>
+                        </div>
+                    </div>
+                    <label class="layui-form-label">是否是菜单</label>
+                    <div class="layui-input-inline">
+                        <select name="ismenu">
+                            <option value="1">是</option>
+                            <option value="0">不是</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">请求地址</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="url" lay-verify="" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                    <label class="layui-form-label">排序</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="num" lay-verify="" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">ID</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="id" lay-verify="" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <input class="layui-btn" lay-filter="addmenu" lay-submit="" value="立即提交"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</@body>

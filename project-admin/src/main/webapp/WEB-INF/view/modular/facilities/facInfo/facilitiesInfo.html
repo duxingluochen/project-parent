@@ -1,0 +1,50 @@
+<#include "${base}/modular/admin/common/public.html"/>
+<@header title="添加设备" keywords="添加设备">
+<script type="text/javascript" src="${base}/static/modular/facilities/facInfo/js/facilitiesInfo.js"></script>
+</@header>
+<@body>
+<div class="layui-tab page-content-wrap">
+    <div class="layui-tab-item layui-show">
+        <form class="layui-form layui-form-pane" style="padding-top: 20px;">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">设施名<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="facName" autocomplete="off" class="layui-input" value="${fac.facName}" lay-verify="required">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">设施类型<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="facType" autocomplete="off" class="layui-input" value="${fac.facType}" lay-verify="required">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">设施用途<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="facPurpose" autocomplete="off" class="layui-input" value="${fac.facPurpose}" lay-verify="required">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">设施单价<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="facPrice" autocomplete="off" class="layui-input" value="${fac.facPrice}" lay-verify="required|validateMoney">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">设施品牌<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="facBrand" autocomplete="off" class="layui-input" value="${fac.facBrand}" lay-verify="required">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <input class="layui-btn" lay-filter="add" lay-submit="" value="立即提交"/>
+                </div>
+            </div>
+            <input type="text" id="id" name="id" autocomplete="off" class="layui-input layui-hide" value="${fac.id}">
+        </form>
+    </div>
+</div>
+</@body>

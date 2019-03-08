@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapscience.modular.vehicle.mapper.VcleInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.mapscience.modular.vehicle.model.VcleInfo">
+        <id column="id" property="id" />
+        <result column="vcle_name" property="vcleName" />
+        <result column="plate_number" property="plateNumber" />
+        <result column="engine_number" property="engineNumber" />
+        <result column="operation_type" property="operationType" />
+        <result column="operation_team" property="operationTeam" />
+        <result column="department" property="department" />
+        <result column="brand_model" property="brandModel" />
+        <result column="deadweight" property="deadweight" />
+        <result column="start_using_time" property="startUsingTime" />
+        <result column="service_life" property="serviceLife" />
+        <result column="last_inspection_time" property="lastInspectionTime" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="oil_type" property="oilType" />
+        <result column="picture" property="picture" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, vcle_name, plate_number, engine_number, operation_type, operation_team, department, brand_model, deadweight, start_using_time, service_life, last_inspection_time, create_time, update_time, oil_type, picture
+    </sql>
+
+
+    <select id="getVcleInfoList" resultMap="BaseResultMap" parameterType="com.baomidou.mybatisplus.plugins.Page">
+        SELECT <include refid="Base_Column_List"/> FROM vcle_info
+        where 1=1
+        <if test="vcleName != null and vcleName != ''">
+            and vcle_name like CONCAT('%',#{vcleName},'%')
+        </if>
+        <if test="plateNumber != null and plateNumber != ''">
+            and plate_number like CONCAT('%',#{plateNumber},'%')
+        </if>
+        order by create_time desc
+    </select>
+
+    <select id="getVcleInfoslist" resultType="map">
+        select count(*) as value,operation_type as name from vcle_info GROUP BY operation_type
+    </select>
+
+    <select id="getVcleInfoNamelist" resultType="map">
+        select count(*) as value,vcle_name as name from vcle_info GROUP BY vcle_name
+    </select>
+
+</mapper>

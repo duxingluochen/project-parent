@@ -1,0 +1,79 @@
+<#include "${base}/modular/admin/common/public.html"/>
+<@header title="车辆基本信息" keywords="车辆基本信息">
+<link rel="stylesheet" href="${base}/static/common/css/bootstrap.css">
+<link rel="stylesheet" href="${base}/static/modular/vehicle/vcleInfo/css/index.css">
+<script type="text/javascript" src="${base}/static/modular/vehicle/vcleInfo/js/vcleInfo.js"></script>
+</@header>
+<@body>
+<div class="wrap-container clearfix">
+    <div class="wrapper">
+        <div class="page">
+            <div class="title">车辆总数</div>
+            <div class="circle circle_04">
+                <img src="${base}/static/modular/admin/image/icon_04.png" alt="">
+            </div>
+            <div class="text">
+                <div class="number" id="totalNum"></div>
+                <div class="bef bef_04"></div>
+            </div>
+        </div>
+        <div class="page">
+            <div class="title">当前作业车辆</div>
+            <div class="circle circle_02">
+                <img src="${base}/static/modular/admin/image/icon_02.png" alt="">
+            </div>
+            <div class="text">
+                <div class="number" id="workingVcle">60</div>
+                <div class="bef bef_02"></div>
+            </div>
+        </div>
+        <div class="page">
+            <div class="chart" id="typeChart"></div>
+        </div>
+        <div class="page">
+            <div class="chart" id="nameChart">
+            </div>
+        </div>
+    </div>
+    <div class="column-content-detail">
+        <form class="layui-form layui-form-pane" action="">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">车辆名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="vcleName" name="vcleName" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">车牌号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="plateNumber" name="plateNumber" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <a class="layui-btn layui-btn-normal" onclick="VcleInfo.refresh()">搜索</a>
+                </div>
+            </div>
+        </form>
+        <div class="layui-form" id="table-list">
+            <table class="layui-table" lay-even lay-skin="nob" id="vcleInfoList" lay-filter="vcleInfoList">
+            </table>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="toolbarVcleInfo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm layui-btn-normal"
+                lay-event="vcleInfo_add">
+            <i class="layui-icon">&#xe654;</i>添加车辆
+        </button>
+        <button class="layui-btn layui-btn-sm layui-btn-warm refresh hidden-xs" lay-event="refresh">
+            <i class="iconfont">&#xe656;</i>刷新
+        </button>
+    </div>
+</script>
+<script type="text/html" id="vcleInfobar">
+    <button class="layui-btn layui-btn-xs" lay-event="edit">编辑</button>
+    <button class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</button>
+</script>
+</@body>

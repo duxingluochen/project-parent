@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapscience.modular.facilities.mapper.FacUseMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.mapscience.modular.facilities.model.FacUse">
+        <id column="id" property="id" />
+        <result column="facstock_id" property="facstockId" />
+        <result column="use_number" property="useNumber" />
+        <result column="user_id" property="userId" />
+        <result column="use_time" property="useTime" />
+        <result column="instructions" property="instructions" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, facstock_id, use_number, user_id, use_time, instructions
+    </sql>
+
+    <select id="selectPageList" resultType="java.util.Map">
+        select
+               u.id,
+               u.facstock_id as facstockId,
+               u.use_number as useNumber,
+               u.user_id as userId,
+               u.use_time as useTime,
+               u.instructions,
+               i.fac_name as facName,
+               s.fac_address as facAddress,
+               r.name
+        from
+             fac_use u,
+             fac_stock s,
+             fac_info i,
+             sys_user r
+        where u.facstock_id = s.id and s.fac_id = i.id and u.user_id = r.id
+        <if test="facName != null and facName != ''">
+            AND I.FAC_NAME LIKE CONCAT('%',#{facName},'%')
+        </if>
+        ORDER BY U.CREATE_TIME DESC
+    </select>
+
+</mapper>

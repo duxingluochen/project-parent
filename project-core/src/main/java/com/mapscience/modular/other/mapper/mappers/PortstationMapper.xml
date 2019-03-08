@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapscience.modular.other.mapper.PortstationMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.mapscience.modular.other.model.Portstation">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="flow_type" property="flowType" />
+        <result column="node_number" property="nodeNumber" />
+        <result column="sort" property="sort" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, flow_type, node_number, sort
+    </sql>
+
+    <select id="selectNextNodeByTaskId" resultMap="BaseResultMap">
+        SELECT n.id, n.name, n.flow_type, n.node_number, n.sort
+        FROM t_portstation n,t_portflow t
+        where n.flow_type = t.flow_type
+          and t.id = #{taskId}
+          and sort > (
+            select n.sort
+                from t_portstation n,t_portflow t
+                where n.node_number = t.current_station and t.id = #{taskId}) limit 1
+    </select>
+
+</mapper>

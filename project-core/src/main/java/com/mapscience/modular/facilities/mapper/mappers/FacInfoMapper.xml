@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapscience.modular.facilities.mapper.FacInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.mapscience.modular.facilities.model.FacInfo">
+        <id column="id" property="id" />
+        <result column="fac_name" property="facName" />
+        <result column="fac_type" property="facType" />
+        <result column="fac_purpose" property="facPurpose" />
+        <result column="fac_price" property="facPrice" />
+        <result column="fac_brand" property="facBrand" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, fac_name, fac_type, fac_purpose, fac_price, fac_brand, create_time
+    </sql>
+
+    <select id="selectFacPageList" resultMap="BaseResultMap" parameterType="com.baomidou.mybatisplus.plugins.Page">
+        SELECT <include refid="Base_Column_List"/> FROM FAC_INFO WHERE 1=1
+        <if test="facName != null and facName != ''">
+            AND FAC_NAME LIKE CONCAT('%',#{facName},'%')
+        </if>
+        <if test="facType != null and facType != ''">
+            AND FAC_TYPE LIKE CONCAT('%',#{facType},'%')
+        </if>
+        ORDER BY CREATE_TIME DESC
+    </select>
+
+</mapper>

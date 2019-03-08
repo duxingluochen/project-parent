@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapscience.modular.other.mapper.PortflowMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.mapscience.modular.other.model.Portflow">
+        <id column="id" property="id" />
+        <result column="current_station" property="currentStation" />
+        <result column="current_emp" property="currentEmp" />
+        <result column="current_times" property="currentTimes" />
+        <result column="flow_type" property="flowType" />
+        <result column="state" property="state" />
+        <result column="event_id" property="eventId" />
+        <result column="opinion" property="opinion" />
+        <result column="create_time" property="createTime" />
+        <result column="starter" property="starter" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, current_station, current_emp, current_times, flow_type, state, event_id, opinion, create_time, starter
+    </sql>
+    
+    <select id="selectSecondNodeByEventId" resultMap="BaseResultMap">
+        select t.id, t.current_station, t.current_emp, t.current_times, t.flow_type, t.state, t.event_id, t.opinion, t.create_time, t.starter
+        from t_portstation n,t_portflow t
+        where n.node_number = t.current_station and t.event_id = #{eventId} order by sort limit 1,1
+    </select>
+
+    <delete id="deleteByEventId">
+        DELETE FROM T_PORTFLOW WHERE EVENT_ID = #{eventId}
+    </delete>
+    
+    <select id="selectFlowNodeSchedule" resultType="map">
+        select p.name,f.state from (
+          select name,node_number,sort from t_portstation where flow_type = (
+            select flow_type from t_portflow where event_id = #{eventId} limit 1
+          )
+        ) p
+        left join (
+             select current_station,state from t_portflow where event_id = #{eventId}
+        ) f
+        ON f.current_station = p.node_number order by p.sort
+    </select>
+
+</mapper>

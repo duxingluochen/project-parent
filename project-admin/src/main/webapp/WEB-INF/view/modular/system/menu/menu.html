@@ -1,0 +1,31 @@
+<#include "${base}/modular/admin/common/_container.html"/>
+<@header title="菜单管理" keywords="菜单管理">
+<link href="${base}/static/common/plugins/layui/css/layui.css">
+<script src="${base}/static/modular/system/menu/menu1.js"></script>
+<script type="text/javascript" src="${base}/static/common/plugins/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="${base}/static/common/plugins/bootstrap/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+<script type="text/javascript" src="${base}/static/common/plugins/bootstrap/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+</@header>
+<@body>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>菜单管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="hidden-xs" id="menuTableToolbar" role="group">
+                            <button  onclick="Menu.openAddMenu()" class="layui-btn layui-btn-primary" >添加</button>
+                            <button  onclick="Menu.openChangeMenu()" class="layui-btn layui-btn-primary" >修改</button>
+                            <button  onclick="Menu.delMenu()" class="layui-btn layui-btn-primary" >删除</button>
+                        </div>
+                        <table id="menuTable"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</@body>

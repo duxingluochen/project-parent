@@ -1,0 +1,105 @@
+<#include "${base}/modular/admin/common/public.html"/>
+<@header title="添加用户" keywords="添加用户">
+<script type="text/javascript">
+    $(function () {
+
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        /**
+         * 关闭窗口
+         * */
+        $("#btn_close").bind("click", function () {
+            parent.layer.close(index);
+        });
+        /**
+         * 提交修改角色
+         */
+        $("#btn_save").bind("click", function () {
+            var ids = MyObject.zTreeCheckedNodes("zTree");
+            var ajax = new $ax(MyObject.ctxPath + "/user/setRole", function () {
+                MyObject.success("角色分配成功！");
+                LayTable.refresh(window.parent.User.table,'userList',null)
+                parent.layer.close(index);
+            }, function (data) {
+                MyObject.error("角色分配失败！" + data.responseJSON.msg + "!");
+            })
+            ajax.set("roleIds", ids);
+            ajax.set("userId", "${userId}");
+            ajax.start();
+        })
+        initZtree();
+    })
+
+    function initZtree() {
+        var setting = {
+            check: {
+                enable: true,
+                chkboxType: {
+                    "Y": "",
+                    "N": ""
+                }
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            }
+        };
+        var ztree = new $ZTree("zTree", "/role/roleTreeListByUserId/${userId}");
+        ztree.setSettings(setting);
+        ztree.init();
+    }
+</script>
+
+</@header>
+<@body>
+<!--<div class="container"
+     style="padding:  0px 10px !important; margin-top: -10px; text-align: center !important;">
+    <div class="row">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>${userAccount!}</h5>
+            </div>
+            <div class="ibox-content">
+                <ul id="zTree" class="ztree"></ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-sm btn-info" type="button" id="btn_save">
+                <i class="ace-icon fa fa-check bigger-110"></i> 保存
+            </button>
+            &nbsp;
+            <button class="btn btn-sm btn-danger" type="button" id="btn_close">
+                <i class="ace-icon fa fa-close bigger-110"></i> 关闭
+            </button>
+        </div>
+    </div>
+</div>-->
+<div class="wrap-container clearfix">
+    <div class="ibox-title">
+        <h5>${userAccount!}</h5>
+    </div>
+    <div class="column-content-detail">
+        <div class="row">
+            <div class="layui-form-item ">
+                <div class="ibox-content">
+                    <ul id="zTree" class="ztree"></ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-sm btn-info" type="button" id="btn_save">
+                    <i class="ace-icon fa fa-check bigger-110"></i> 保存
+                </button>
+                &nbsp;
+                <button class="btn btn-sm btn-danger" type="button" id="btn_close">
+                    <i class="ace-icon fa fa-close bigger-110"></i> 关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</@body>

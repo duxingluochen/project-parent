@@ -1,0 +1,34 @@
+.flow span::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    background-color: #58a;
+    transform: skewX(-45deg);
+}
+.flow span{
+    width: 100px;
+    height: 40px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+    float: left;
+}
+.arrive {
+    background-color: #F5A623;
+}
+.finish {
+    background-color: #7ED321;
+}
+.reject {
+    background-color: #D0021B;
+}
+.other {
+    background-color: #979797;
+}
